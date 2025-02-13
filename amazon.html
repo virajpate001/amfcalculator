@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Price Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Amazon Price Calculator</h2>
+        <img class="lw" src="img/amazon.png" alt="">
+        <label>Product Buy Price:</label>
+        <input type="number" id="buyPrice" placeholder="Enter buy price">
+        
+        <label>GST (%):</label>
+        <select id="gst">
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18">18%</option>
+            <option value="28">28%</option>
+        </select>
+        
+        <label>Packaging Charge:</label>
+        <input type="number" id="packaging" placeholder="Enter packaging charge">
+        
+        <label>Transport Charge:</label>
+        <input type="number" id="transport" placeholder="Enter transport charge">
+        
+        <label>Profit:</label>
+        <input type="number" id="profit" placeholder="Minimum 150 Rs.">
+        
+        <button onclick="calculateFinalPrice()">Calculate Final Price</button>
+        
+        <h3>Final Price: ₹<span id="finalPrice">0.00</span></h3>
+    </div>
+
+    <script>
+        function calculateFinalPrice() {
+            let buyPrice = parseFloat(document.getElementById('buyPrice').value) || 0;
+            let gst = parseFloat(document.getElementById('gst').value) || 0;
+            let packaging = parseFloat(document.getElementById('packaging').value) || 0;
+            let transport = parseFloat(document.getElementById('transport').value) || 0;
+            let profit = parseFloat(document.getElementById('profit').value) || 0;
+            
+            let basePrice = buyPrice + packaging + transport;
+            let gstAmount = (basePrice * gst) / 100;
+            let finalPrice = (basePrice + gstAmount + profit) * 4;
+            
+            document.getElementById('finalPrice').innerText = finalPrice.toFixed(2);
+        }
+    </script>
+</body>
+</html>
